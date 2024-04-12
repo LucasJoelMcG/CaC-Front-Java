@@ -1,11 +1,9 @@
-    .carousel-item img {
-        max-height: 450px; 
-        width: 100%;
-        object-fit: contain;
-    }
-    body {
-        background-color: #a9bbcd; 
-    }
-    .carousel-indicators {
-        bottom:-35px
-    }
+body {
+  background-color: #a9bbcd;
+}
+
+.carousel-item img {
+  max-height: 430px;
+  width: 100%;
+  object-fit: contain;
+}
