@@ -97,8 +97,8 @@ document.getElementById('editModal').addEventListener('show.bs.modal', function 
 // se necesitaria un backend para no exponer cuestiones no deseadas :)
 function createMeme() {
   const memeId = lastClickedMemeId;
-  const username = 'LucasMacGregor'; 
-  const password = 'claveparaelcac'; 
+  const username = ''; 
+  const password = ''; 
 
   // me traigo los datos de los input
   const memeForm = document.getElementById('memeForm');
