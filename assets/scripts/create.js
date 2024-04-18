@@ -97,45 +97,46 @@ document.getElementById('editModal').addEventListener('show.bs.modal', function 
 // se necesitaria un backend para no exponer cuestiones no deseadas :)
 function createMeme() {
   const memeId = lastClickedMemeId;
-  const username = ''; 
-  const password = ''; 
 
   // me traigo los datos de los input
   const memeForm = document.getElementById('memeForm');
   const textInputs = memeForm.querySelectorAll('input[type="text"]');
-  const captions = [];
+  const boxes = [];
   textInputs.forEach(input => {
-      captions.push(input.value);
+      boxes.push({text: input.value.toUpperCase()});
   });
 
-  // preparo los datos para el request
-  const formData = new FormData();
-  formData.append('template_id', memeId);
-  formData.append('username', username);
-  formData.append('password', password);
-  captions.forEach((caption, index) => {
-      formData.append(`boxes[${index}][text]`, caption);
-  });
-
-  // Send POST request to Imgflip API
-  fetch('https://api.imgflip.com/caption_image', {
-      method: 'POST',
-      body: formData
-  })
-  .then(response => response.json())
-  .then(data => {
+  const requestBody = {
+    template_id: String(memeId),
+    boxes,
+  }
+  // llama a la api para crear el meme
+  memeCreation(requestBody).then(data => {
     if (data.success) {
       // Si la creación de meme sale bien, mostrarlo en una nueva pestaña
       const imageUrl = data.data.url;
       window.open(imageUrl, '_blank');
   } else {
       // sino mandarlo por consola
-      console.error('Error al crear el meme:', data.error_message);
+      console.error('Error al crear el meme:', data);
   }
   })
   .catch(error => {
       console.error('Error al crear el meme:', error);
   });
+}
+
+function memeCreation(requestBody) {
+  const API_URL = atob('aHR0cHM6Ly9saW1lLWZhaXRoZnVsLWRyaWxsLmN5Y2xpYy5hcHA=');
+  return fetch(`${API_URL}/createMeme`, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(requestBody),
+  })
+  .then(response => response.json())
+  .catch(error => console.error(error));
 }
 
 // Traer los memes cuando se cargue la página
