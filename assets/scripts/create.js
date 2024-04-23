@@ -9,7 +9,7 @@ function fetchMemeTemplates(page, searchTerm = '') {
     .then(response => response.json())
     .then(data => {
       let memes = [];
-      console.log(data.data.memes)
+      //filtro los memes segun la busqueda o los tomo a todos si no hay busqueda
       if (searchTerm!=='') {
         memes = data.data.memes.filter(meme => meme.name.toLowerCase().includes(searchTerm.toLowerCase()));
       }
