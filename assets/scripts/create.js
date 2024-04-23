@@ -4,11 +4,18 @@ let lastClickedMemeId = 0;
 const memesPerPage = 8;
 
 // funcion para traer los memes de la api
-function fetchMemeTemplates(page) {
+function fetchMemeTemplates(page, searchTerm = '') {
   fetch('https://api.imgflip.com/get_memes')
     .then(response => response.json())
     .then(data => {
-      const memes = data.data.memes;
+      let memes = [];
+      console.log(data.data.memes)
+      if (searchTerm!=='') {
+        memes = data.data.memes.filter(meme => meme.name.toLowerCase().includes(searchTerm.toLowerCase()));
+      }
+      else {
+        memes=data.data.memes;
+      }
       const memesContainer = document.getElementById('memesContainer');
       // Limpio el contenedor de memes de la pagina
       memesContainer.innerHTML = '';
@@ -137,6 +144,10 @@ function memeCreation(requestBody) {
   })
   .then(response => response.json())
   .catch(error => console.error(error));
+}
+
+function inputSearch(value) {
+  fetchMemeTemplates(1,value);
 }
 
 // Traer los memes cuando se cargue la página
