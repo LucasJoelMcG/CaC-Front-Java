@@ -134,7 +134,7 @@ function createMeme() {
 }
 
 function memeCreation(requestBody) {
-  const API_URL = atob('aHR0cHM6Ly9saW1lLWZhaXRoZnVsLWRyaWxsLmN5Y2xpYy5hcHA=');
+  const API_URL = atob('aHR0cHM6Ly9wb3J0Zm9saW8tbWFpbGVyLW5pbmUudmVyY2VsLmFwcA==');
   return fetch(`${API_URL}/createMeme`, {
       method: 'POST',
       headers: {
