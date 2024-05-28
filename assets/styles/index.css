@@ -1,9 +1,13 @@
 body {
   background-color: #a9bbcd;
+  min-height: 100vh;
 }
 
-.carousel-item img {
-  max-height: 430px;
-  width: 100%;
-  object-fit: contain;
+.container-background {
+  min-height: 79vh;
+}
+
+.invalid-login {
+  font-weight: bold;
+  color: crimson;
 }

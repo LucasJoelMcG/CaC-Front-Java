@@ -1,3 +1,4 @@
+"use strict";
 //variables globales necesarias para el funcionamiento de las paginas, id de meme y los memes por pagina
 let currentPage = 1;
 let lastClickedMemeId = 0;
